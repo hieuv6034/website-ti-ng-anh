@@ -1,0 +1,33 @@
+<form
+    class="user"
+    [formGroup]="loginFormGroup"
+    autocomplete="off"
+    (submit)="login()"
+>
+    <div class="form-group">
+        <ecm-input
+            type="text"
+            [required]="true"
+            [placeholder]="'Nhập tên đăng nhập'"
+            formControlName="username"
+            [errorsMessage]="{
+                required: 'Tên đăng nhập không được trống'
+            }"
+        ></ecm-input>
+    </div>
+    <div class="form-group">
+        <ecm-input
+            type="password"
+            [required]="true"
+            [placeholder]="'Nhập mật khẩu'"
+            formControlName="password"
+            [errorsMessage]="{
+                required: 'Mật khẩu không được trống'
+            }"
+        ></ecm-input>
+    </div>
+    <button class="btn btn-primary btn-user w-100 text-capitalize">
+        Đăng nhập
+    </button>
+    <hr />
+</form>

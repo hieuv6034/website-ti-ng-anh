@@ -1,0 +1,149 @@
+<form [formGroup]="formGroup" class="d-flex flex-column row-gap-2">
+    <div class="row">
+        <div class="col-md-6">
+            <ecm-select
+                label="Khóa học"
+                [items]="$course | async"
+                bindLabel="name"
+                bindValue="id"
+                [required]="true"
+                placeholder="Chọn khóa học"
+                formControlName="courseId"
+            ></ecm-select>
+        </div>
+
+        <div class="col-md-6">
+            <ecm-select
+                label="Lớp học"
+                [items]="$classRooms | async"
+                bindLabel="name"
+                bindValue="id"
+                [required]="true"
+                placeholder="Chọn lớp học"
+                formControlName="classRoomId"
+            ></ecm-select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ecm-select
+                label="Giáo viên"
+                [items]="$teachers | async"
+                bindLabel="name"
+                bindValue="id"
+                [required]="true"
+                placeholder="Chọn giáo viên"
+                formControlName="teacherId"
+                [templates]="[
+                    {
+                        name: 'ng-option-tmp',
+                        templateRef: user
+                    },
+                    {
+                        name: 'ng-label-tmp',
+                        templateRef: user
+                    }
+                ]"
+            ></ecm-select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ecm-select
+                label="Học viên"
+                [items]="$students | async"
+                [multiple]="true"
+                bindLabel="name"
+                bindValue="id"
+                [required]="true"
+                placeholder="Chọn học viên"
+                formControlName="students"
+                [templates]="[
+                    {
+                        name: 'ng-option-tmp',
+                        templateRef: templateOption
+                    },
+                    {
+                        name: 'ng-label-tmp',
+                        templateRef: templateLabel
+                    }
+                ]"
+            ></ecm-select>
+        </div>
+    </div>
+
+    <div class="row row-gap-10px" formArrayName="details">
+        <div class="d-flex px-0">
+            <div class="col-md-11 px-0 d-flex">
+                <div class="col-md-6">
+                    <span class="fw-bold required">Thứ</span>
+                </div>
+                <div class="col-md-6">
+                    <span class="fw-bold required">Giờ Bắt Đầu</span>
+                </div>
+            </div>
+            <div class="col-md-1 px-0">
+                <button class="btn btn-sm btn-primary" (click)="addRow()">
+                    <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <div
+            class="d-flex flex-column row-gap-20px px-0"
+            *ngFor="let detailForm of detailsArrayForm.controls; let i = index"
+            [formArrayName]="i"
+        >
+            <div class="d-flex">
+                <div class="col-md-11 px-0 d-flex">
+                    <div class="col-md-6">
+                        <ecm-select
+                            [items]="day"
+                            bindLabel="label"
+                            bindValue="id"
+                            [required]="true"
+                            placeholder="Chọn thứ"
+                            formControlName="day"
+                        ></ecm-select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ecm-input
+                            [required]="true"
+                            [type]="'time'"
+                            formControlName="startTime"
+                        ></ecm-input>
+                    </div>
+                </div>
+
+                <div class="col-md-1 px-0">
+                    <button
+                        class="btn btn-sm btn-danger"
+                        (click)="removeRow(i)"
+                    >
+                        <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #user ng-option-tmp let-item="item">
+    <span>{{ item.lastName }} {{ item.firstName }}</span>
+</ng-template>
+
+<ng-template #templateLabel let-item="item" let-index="index" let-clear="clear">
+    <div class="ng-value">
+        <span class="ng-value-icon left" (click)="clear(item)"> &times; </span>
+        <span class="ng-value-label text-capitalize">
+            {{ item.lastName }} {{ item.firstName }}
+        </span>
+    </div>
+</ng-template>
+<ng-template #templateOption let-item="item" let-index="index">
+    <span class="text-capitalize ng-option-label">
+        {{ item.lastName }} {{ item.firstName }}
+    </span>
+</ng-template>

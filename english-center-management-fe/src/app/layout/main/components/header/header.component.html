@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 shadow">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button
+        id="sidebar-toggle-top"
+        class="btn btn-link d-md-none rounded-circle mr-3"
+        (click)="openSidebarMobile()"
+    >
+        <fa-icon [icon]="'bars'"></fa-icon>
+    </button>
+
+    <span class="h4 ps-3 d-none d-md-block text-capitalize">{{
+        title$ | async | translate
+    }}</span>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <user-dropdown (toggle)="toggleDropdown($event)"></user-dropdown>
+        </li>
+    </ul>
+</nav>

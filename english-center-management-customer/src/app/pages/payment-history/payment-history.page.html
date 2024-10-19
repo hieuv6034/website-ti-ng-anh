@@ -1,0 +1,9 @@
+<div class="container my-3 d-flex flex-column gap-3">
+    <ecm-box>
+        <bill-form-search (search)="ngOnSearch($event)"></bill-form-search>
+    </ecm-box>
+
+    <ecm-box *ngIf="$bills | async as bills">
+        <bill-grid [rowData]="bills"></bill-grid>
+    </ecm-box>
+</div>

@@ -1,0 +1,13 @@
+<div class="d-flex flex-column gap-4 h-100">
+    <ecm-box>
+        <div
+            class="d-flex flex-column row-gap-4 h-100"
+            *ngIf="$timetable | async as timetable"
+        >
+            <timetable-grid
+                [rowData]="timetable.items"
+                [action]="['MAKE-SCORE']"
+            ></timetable-grid>
+        </div>
+    </ecm-box>
+</div>

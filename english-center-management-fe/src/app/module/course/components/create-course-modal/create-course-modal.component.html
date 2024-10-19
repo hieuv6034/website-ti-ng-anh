@@ -1,0 +1,10 @@
+<modal-wrapper
+    [headerTitle]="course ? 'Cập nhật khóa học' : 'Tạo mới khóa học'"
+    (save)="onSaveClassRoom()"
+>
+    <create-course-form
+        [course]="course"
+        (formInitialized)="formGroup = $event"
+        (changeAvatar)="avatarFile = $event"
+    ></create-course-form>
+</modal-wrapper>

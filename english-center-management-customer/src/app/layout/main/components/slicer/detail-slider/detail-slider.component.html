@@ -1,0 +1,106 @@
+<section *ngIf="$course | async as course" class="slider-area slider-area2">
+    <div class="slider-active">
+        <!-- Single Slider -->
+        <div class="single-slider slider-height2">
+            <div class="container">
+                <div class="row p">
+                    <div class="col-xl-8 col-lg-11 col-md-12">
+                        <div class="hero__caption hero__caption2">
+                            <div class="d-flex flex-column row-gap-2 mb-4">
+                                <h1 class="mb-0">{{ course.name }}</h1>
+                                <div class="d-flex gap-1 align-items-center">
+                                    <p class="mb-0"><i class="ti-money"></i></p>
+                                    <div class="d-flex gap-1">
+                                        <p class="mb-0">Giá tiền:</p>
+                                        <div class="d-flex gap-2">
+                                            <p class="mb-0">
+                                                {{
+                                                    (course.price *
+                                                        (100 -
+                                                            course.discount)) /
+                                                        100 | money: 'VND'
+                                                }}
+                                            </p>
+                                            <p
+                                                *ngIf="
+                                                    course.discount > 0 &&
+                                                    course.price *
+                                                        (course.discount /
+                                                            100) >
+                                                        0 as amtDiscount
+                                                "
+                                                class="mb-0 text-decoration-line-through"
+                                            >
+                                                {{ amtDiscount | money: 'VND' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 align-items-center">
+                                    <p class="mb-0">
+                                        <i class="ti-pencil"></i>
+                                    </p>
+                                    <div class="d-flex gap-1">
+                                        <p class="mb-0">Số buổi học:</p>
+                                        <p class="mb-0">
+                                            {{ course.numberOfLesson }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 align-items-center">
+                                    <p class="mb-0">
+                                        <i class="ti-timer"></i>
+                                    </p>
+                                    <div class="d-flex gap-1">
+                                        <p class="mb-0">Thời lượng:</p>
+                                        <p class="mb-0">
+                                            {{ course.duration }} tiếng
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="mb-0">Lần cập nhật gần nhất:</p>
+                                    <p class="mb-0">
+                                        {{
+                                            course.updatedDate
+                                                | date: 'dd/MM/yyyy'
+                                        }}
+                                    </p>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="mb-0">
+                                        {{ course.shortDescription }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 pb-2 justify-content-end">
+                <div class="col-md-2">
+                    <a
+                        [routerLink]="['/thanh-toan', course.name]"
+                        [queryParams]="{ id: course.id }"
+                        class="border-btn border-btn2 p-2 text-white border-2"
+                    >
+                        <i class="ti-shopping-cart text-white"></i>
+                        Mua khóa học
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a
+                        class="border-btn border-btn2 p-2 text-white border-2"
+                        [routerLink]="'/kiem-tra'"
+                        [queryParams]="{ id: course.id, name: course.name }"
+                    >
+                        <i class="ti-pencil-alt text-white"></i>
+                        Kiểm tra thử
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

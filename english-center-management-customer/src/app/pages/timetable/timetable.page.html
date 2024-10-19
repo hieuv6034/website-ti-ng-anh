@@ -1,0 +1,31 @@
+<div class="p-3">
+    <div class="d-flex flex-column gap-20px">
+        <div *ngIf="timetableMap">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let day of days">{{ day.label }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let map of timetableMap | keyvalue">
+                        <td>{{ map.key }}</td>
+                        <td *ngFor="let day of days; let i = index">
+                            <ng-container *ngFor="let detail of map.value">
+                                <timetable-info
+                                    *ngIf="detail.day === day.id"
+                                    [time]="map.key"
+                                    [detail]="detail"
+                                    title="Nhấn để thao tác"
+                                >
+                                </timetable-info>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

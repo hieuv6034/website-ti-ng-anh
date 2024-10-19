@@ -1,0 +1,31 @@
+<modal-wrapper [readonly]="true" headerTitle="Tài liệu học tập">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Tải xuống</th>
+                <th>Ngày tải lên</th>
+                <th>Người tải lên</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="$resources | async as resources">
+            <tr *ngFor="let resource of resources">
+                <td>
+                    <p class="text-primary">{{ resource.fileName }}</p>
+                </td>
+                <td>
+                    <a
+                        class="text-primary"
+                        [href]="resource.url"
+                        [download]="resource.fileName"
+                        target="_blank"
+                    >
+                        Tải xuống
+                    </a>
+                </td>
+                <td>{{ resource.createdDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ resource.createdBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+</modal-wrapper>
